@@ -1,30 +1,48 @@
 .chat-container {
-  max-width: 600px;
-  height: 90vh;
-  margin: 20px auto;
+  height: 100vh;
+  width: 100vw;
   display: flex;
-  flex-direction: column;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background: #fff;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  box-shadow: 0 0 10px rgb(0 0 0 / 0.1);
-  position: relative;
+  flex-direction: row;
+  background: #e8f5e9;
+  overflow: hidden;
 }
 
-.chat-container h2 {
-  text-align: center;
+/* ჩატის მთავარი ნაწილი (UserList-ის გვერდით) */
+.chat-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100vh;
+}
+
+/* მწვანე ჰედერი */
+.chat-header {
+  background: #66bb6a;
+  color: #fff;
+  padding: 24px 24px 16px 24px;
+  border-radius: 0 0 32px 32px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 64px;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.1);
+  gap: 12px;
+  flex-shrink: 0;
 }
 
 .chat-box {
   flex: 1;
-  padding: 16px;
   overflow-y: auto;
-  background: #f0f2f5;
+  min-height: 0;
+  background: #e8f5e9;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
   scroll-behavior: smooth;
+  padding: 24px 12px 12px 12px;
 }
 
 .message {
@@ -41,11 +59,12 @@
 }
 
 .message.mine:not(.system-message):not(:has(.image-wrapper)) {
-  background-color: #0084ff;
-  color: white;
+  background-color: #a5d6a7;
+  color: black;
   align-self: flex-end;
   border-bottom-right-radius: 4px;
   padding: 10px 14px;
+  font-size: 1.2rem;
 }
 
 .message.other:not(.system-message):not(:has(.image-wrapper)) {
@@ -54,6 +73,7 @@
   align-self: flex-start;
   border-bottom-left-radius: 4px;
   padding: 10px 14px;
+  font-size: 1.2rem;
 }
 
 .message-nick {
@@ -79,29 +99,22 @@
   padding: 4px;
 }
 
-.mine-image {
-  background-color: #0084ff; /* ლურჯი ჩარჩო */
-}
-
-.other-image {
-  background-color: #e4e6eb; /* ნაცრისფერი ჩარჩო */
-}
-
 .chat-image {
   display: block;
-  max-width: 200px;
+  max-width: 500px;
   border-radius: 10px;
   background-color: transparent !important;
   box-shadow: none;
 }
 
+/* ჩატის ფორმა */
 .chat-form {
   display: flex;
-  padding: 12px 16px;
-  border-top: 1px solid #ddd;
-  background-color: #fff;
-  align-items: flex-end;
-  gap: 8px;
+  padding: 16px 16px;
+  border-top: none;
+  background-color: #e8f5e9;
+  align-items: center;
+  gap: 10px;
   position: sticky;
   bottom: 0;
   z-index: 10;
@@ -109,67 +122,71 @@
 
 .chat-input {
   flex: 1;
-  min-height: 40px;
-  max-height: 100px;
-  padding: 10px 14px;
-  font-size: 15px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
+  min-height: 44px;
+  max-height: 120px;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: none;
+  border-radius: 16px;
   outline: none;
   box-sizing: border-box;
   resize: vertical;
   font-family: inherit;
   line-height: 1.4;
   overflow-y: auto;
-  color: #050505;
+  color: #1b5e20;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(76, 175, 80, 0.08);
 }
 
 .chat-input::placeholder {
-  color: #888;
+  color: #81c784;
   opacity: 1;
 }
 
 .send-button {
-  width: 50px;
-  height: 50px;
-  background-color: #0084ff;
+  width: 48px;
+  height: 48px;
+  background-color: #43a047;
   border: none;
-  border-radius: 50%;
+  border-radius: 16px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: background-color 0.2s ease;
   color: white;
+  font-size: 2rem;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.1);
 }
 
 .send-button:hover {
-  background-color: #006bbf;
+  background-color: #388e3c;
 }
 
 .send-button svg {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   stroke-width: 2.5;
   stroke: white;
 }
 
 .emoji-button {
-  font-size: 22px;
+  font-size: 2rem;
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: 0 8px 0 0;
   line-height: 1;
-  color: #606770;
+  color: #388e3c;
   margin-right: 4px;
 }
 
 .file-upload-label {
   cursor: pointer;
-  font-size: 22px;
+  font-size: 1.7rem;
   margin-left: 4px;
-  color: #606770;
+  color: #388e3c;
   user-select: none;
   display: flex;
   align-items: center;
@@ -199,18 +216,59 @@
   border-radius: 3px;
 }
 
+/* მობილური ვერსია */
 @media (max-width: 600px) {
   .chat-container {
-    width: 100vw;
+    flex-direction: column;
     height: 100vh;
-    border-radius: 0;
-    margin: 0;
+    width: 100vw;
   }
+  .chat-main {
+    height: 100vh;
+    min-width: 0;
+  }
+  .chat-header {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
   .chat-box {
-    padding: 12px;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 16px 4px 8px 4px;
+    gap: 10px;
   }
-  .chat-input {
-    min-height: 36px;
-    font-size: 14px;
+  .chat-form {
+    padding: 10px 6px;
+    gap: 6px;
+  }
+  .send-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    font-size: 1.5rem;
+  }
+  .emoji-button {
+    font-size: 1.5rem;
+  }
+
+  .chat-image {
+    display: block;
+    max-width: 300px;
+    border-radius: 10px;
+    background-color: transparent !important;
+    box-shadow: none;
+  }
+
+  .message-nick {
+    width: 100%;
+    font-weight: 600;
+    font-size: 11px;
+    margin-bottom: 4px;
+    color: #65676b;
+    user-select: none;
   }
 }

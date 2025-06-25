@@ -1,33 +1,38 @@
 .message {
-  max-width: 70%;
-  margin-bottom: 8px;
-  padding: 8px 12px;
-  border-radius: 16px;
+  max-width: 80%;
+  margin-bottom: 12px;
+  padding: 14px 18px;
+  border-radius: 20px;
   word-break: break-word;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.08);
+  font-size: 1.1rem;
 }
 
 .message-nick {
-  font-size: 12px;
+  font-size: 13px;
   margin-bottom: 4px;
   opacity: 0.7;
+  color: #388e3c;
 }
 
 .message-text {
-  font-size: 16px;
+  font-size: 1.1rem;
 }
 
 .mine {
-  background-color: #0084ff;
-  color: white;
+  background-color: #a5d6a7;
+  color: #1b5e20;
   align-self: flex-end;
+  border-bottom-right-radius: 8px;
 }
 
 .other {
-  background-color: #e5e5ea;
-  color: black;
+  background-color: #c8e6c9;
+  color: #1b5e20;
   align-self: flex-start;
+  border-bottom-left-radius: 8px;
 }
 
 .system-message {
@@ -36,4 +41,20 @@
   max-width: 100%;
   text-align: center;
   margin-bottom: 12px;
+  background: transparent;
+  box-shadow: none;
+}
+
+@media (max-width: 600px) {
+  .message {
+    max-width: 95%;
+    padding: 10px 12px;
+    font-size: 5rem;
+    border-radius: 16px;
+  }
+  .mine,
+  .other {
+    font-size: 1rem;
+    border-radius: 16px;
+  }
 }

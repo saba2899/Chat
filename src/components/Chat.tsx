@@ -161,15 +161,19 @@ export default function Chat({ username, token, onLogout }: ChatProps) {
   }, [messages, username]);
 
   return (
-    <div style={{ display: "flex", height: "90vh", background: "#e3f2fd" }}>
-      <UserList userStatus={userStatus} />
-
-      <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-        <h2 style={{ color: "#1976d2", textAlign: "center" }}>
-          Welcome, {username}!
-        </h2>
-
-        <div className="chat-box" style={{ background: "#bbdefb" }}>
+    <div className="chat-container">
+      <UserList
+        userStatus={userStatus}
+        username={username}
+        onLogout={onLogout}
+      />
+      <div className="chat-main">
+        <div className="chat-header">
+          <span>
+            Hey <b>{username}</b>
+          </span>
+        </div>
+        <div className="chat-box">
           {messages.map((msg) => {
             const isMine = msg.nickname === username;
             return (
@@ -178,10 +182,9 @@ export default function Chat({ username, token, onLogout }: ChatProps) {
                 className={`message ${isMine ? "mine" : "other"} ${
                   msg.system ? "system-message" : ""
                 }`}
-                style={{ background: isMine ? "#90caf9" : "#e3f2fd" }}
               >
                 {!msg.system && (
-                  <div className="message-nick" style={{ color: "#1976d2" }}>
+                  <div className="message-nick">
                     {isMine ? "You" : msg.nickname || "Unknown"}
                     {msg.readBy && msg.readBy.includes(username) && (
                       <span
@@ -199,94 +202,59 @@ export default function Chat({ username, token, onLogout }: ChatProps) {
                 {msg.system ? (
                   <em>{msg.text}</em>
                 ) : msg.image ? (
-                  <div
-                    className={`image-wrapper ${
-                      isMine ? "mine-image" : "other-image"
-                    }`}
-                  >
-                    <img
-                      src={msg.image}
-                      alt="Chat image"
-                      className="chat-image"
-                    />
-                  </div>
+                  <img
+                    src={msg.image}
+                    alt="attachment"
+                    className="chat-image"
+                  />
                 ) : (
-                  msg.text
+                  <span className="message-text">{msg.text}</span>
                 )}
               </div>
             );
           })}
           <div ref={messagesEndRef} />
         </div>
-        <form onSubmit={handleSend} className="chat-form">
+        <form className="chat-form" onSubmit={handleSend}>
           <button
             type="button"
-            onClick={() => setShowPicker((val) => !val)}
             className="emoji-button"
-            title="Emoji picker"
-            style={{ color: "#1976d2" }}
+            onClick={() => setShowPicker((v) => !v)}
           >
-            😀
+            <span role="img" aria-label="emoji">
+              😊
+            </span>
           </button>
           {showPicker && (
             <div className="emoji-picker-container">
-              <EmojiPickerReact onEmojiClick={addEmoji} />
+              <EmojiPickerReact
+                onEmojiClick={addEmoji}
+                autoFocusSearch={false}
+                height={350}
+                width={280}
+              />
             </div>
           )}
-          <textarea
+          <input
+            className="chat-input"
+            type="text"
             placeholder="Type your message..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            autoFocus
-            required={!selectedFile}
-            className="chat-input"
-            style={{
-              resize: "none",
-              overflow: "hidden",
-              background: "#e3f2fd",
-              color: "#1976d2",
-            }}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                handleSend(e as unknown as React.FormEvent);
-              }
-            }}
           />
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleFileChange}
-            style={{ display: "none" }}
-            id="fileInput"
-          />
-          <label
-            htmlFor="fileInput"
-            className="file-upload-label"
-            title="Upload image"
-            style={{ color: "#1976d2" }}
-          >
-            ��
+          <label className="file-upload-label">
+            <input
+              type="file"
+              style={{ display: "none" }}
+              accept="image/*"
+              onChange={handleFileChange}
+            />
+            📎
           </label>
-          <button
-            type="submit"
-            className="send-button"
-            title="Send"
-            style={{ background: "#1976d2", color: "#fff" }}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              style={{ width: "30px", height: "30px" }}
-            >
-              <line x1="2" y1="12" x2="13" y2="12" />
-              <polygon points="13 2 22 12 13 22 13 2" />
-            </svg>
+          <button className="send-button" type="submit">
+            <span role="img" aria-label="send">
+              ➔
+            </span>
           </button>
         </form>
       </div>

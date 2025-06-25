@@ -1,67 +1,72 @@
 .user-list-panel {
-  width: 200px;
+  width: 220px;
   min-width: 160px;
-  max-width: 240px;
+  max-width: 260px;
   height: 90vh;
-  background: #f5f7fa;
-  border-right: 1px solid #e0e0e0;
-  border-radius: 8px 0 0 8px;
-  box-shadow: 2px 0 8px rgba(33, 150, 243, 0.04);
+  background: #e8f5e9;
+  border-right: none;
+  border-radius: 24px 0 0 24px;
+  box-shadow: 2px 0 16px rgba(76, 175, 80, 0.08);
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  padding: 0 0 12px 0;
+  padding: 0 0 16px 0;
+  transition: left 0.3s cubic-bezier(0.4, 2, 0.6, 1), box-shadow 0.2s;
+  position: relative;
+  z-index: 100;
 }
 
 .user-list-title {
   margin: 0;
-  padding: 18px 0 10px 0;
-  text-align: center;
-  color: #1976d2;
-  font-size: 1.2rem;
-  font-weight: 600;
+  padding: 24px 0 14px 0;
+  text-align: left;
+  color: #1b5e20;
+  font-size: 1.5rem;
+  font-weight: 700;
   letter-spacing: 1px;
+  padding-left: 24px;
 }
 
 .user-list-scroll {
   flex: 1;
   overflow-y: auto;
-  padding: 0 10px;
+  padding: 0 16px;
 }
 
 .user-list-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 6px;
-  border-radius: 6px;
+  gap: 12px;
+  padding: 12px 10px;
+  border-radius: 12px;
   transition: background 0.15s;
   cursor: pointer;
+  background: transparent;
 }
 .user-list-item:hover {
-  background: #e3f2fd;
+  background: #c8e6c9;
 }
 
 .user-status-dot {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   display: inline-block;
   margin-right: 2px;
-  border: 1.5px solid #fff;
+  border: 2px solid #fff;
   box-shadow: 0 0 2px #bdbdbd;
 }
 
 .user-list-name {
-  font-weight: 500;
-  color: #1976d2;
+  font-weight: 600;
+  color: #1b5e20;
   flex: 1;
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
 .user-list-status {
-  font-size: 0.9rem;
-  color: #888;
+  font-size: 1rem;
+  color: #388e3c;
   text-transform: capitalize;
 }
 
@@ -69,4 +74,110 @@
   color: #bdbdbd;
   text-align: center;
   margin-top: 30px;
+}
+
+/* ბურგერ ღილაკი */
+.burger-menu-btn {
+  display: none;
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 200;
+  background: #43a047;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  width: 44px;
+  height: 44px;
+  font-size: 2rem;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.12);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.burger-menu-btn:active {
+  background: #388e3c;
+}
+
+/* მობილური ვერსია */
+@media (max-width: 600px) {
+  .user-list-panel {
+    position: fixed;
+    left: -100vw;
+    top: 0;
+    height: 100vh;
+    border-radius: 0 24px 24px 0;
+    box-shadow: 4px 0 24px rgba(76, 175, 80, 0.18);
+    background: #e8f5e9;
+    transition: left 0.3s cubic-bezier(0.4, 2, 0.6, 1), box-shadow 0.2s;
+    width: 80vw;
+    max-width: 320px;
+  }
+  .user-list-panel.open {
+    left: 0;
+  }
+  .burger-menu-btn {
+    display: flex;
+  }
+}
+
+.user-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 12px;
+  padding: 20px 18px 8px 18px;
+}
+.user-list-greeting {
+  flex: 1;
+  text-align: left;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1b5e20;
+  letter-spacing: 1px;
+  margin: 0;
+  padding: 0;
+}
+@media (max-width: 600px) {
+  .user-list-header {
+    padding: 14px 10px 6px 10px;
+    gap: 8px;
+  }
+  .user-list-greeting {
+    font-size: 1.1rem;
+  }
+}
+
+.logout-btn {
+  display: flex;
+  justify-content: end;
+  background: #a5d6a7;
+  color: #1b5e20;
+  border: none;
+  border-radius: 16px;
+  padding: 10px 22px;
+  font-size: 1.08rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-right: 12px;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.1);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  outline: none;
+  min-width: 80px;
+}
+.logout-btn:hover,
+.logout-btn:focus {
+  background: #66bb6a;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(76, 175, 80, 0.18);
+}
+@media (max-width: 600px) {
+  .logout-btn {
+    padding: 8px 16px;
+    font-size: 1rem;
+    border-radius: 12px;
+    margin-left: 8px;
+    min-width: 70px;
+  }
 }

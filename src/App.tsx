@@ -72,36 +72,6 @@ export default function App() {
 
   return (
     <>
-      <div
-        style={{
-          position: "absolute",
-          top: 10,
-          right: 10,
-          zIndex: 1000,
-          color: "#1976d2",
-          fontWeight: 500,
-          background: "#e3f2fd",
-          borderRadius: 8,
-          padding: "6px 16px",
-          boxShadow: "0 2px 8px rgba(33,150,243,0.08)",
-        }}
-      >
-        Logged in as <b>{user.username}</b>
-        <button
-          onClick={handleLogout}
-          style={{
-            marginLeft: 16,
-            background: "#1976d2",
-            color: "#fff",
-            border: "none",
-            borderRadius: 4,
-            padding: "4px 12px",
-            cursor: "pointer",
-          }}
-        >
-          Logout
-        </button>
-      </div>
       <Chat
         username={user.username}
         token={user.token}
