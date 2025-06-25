@@ -1,0 +1,39 @@
+.message {
+  max-width: 70%;
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  border-radius: 16px;
+  word-break: break-word;
+  display: flex;
+  flex-direction: column;
+}
+
+.message-nick {
+  font-size: 12px;
+  margin-bottom: 4px;
+  opacity: 0.7;
+}
+
+.message-text {
+  font-size: 16px;
+}
+
+.mine {
+  background-color: #0084ff;
+  color: white;
+  align-self: flex-end;
+}
+
+.other {
+  background-color: #e5e5ea;
+  color: black;
+  align-self: flex-start;
+}
+
+.system-message {
+  font-style: italic;
+  color: #888;
+  max-width: 100%;
+  text-align: center;
+  margin-bottom: 12px;
+}
