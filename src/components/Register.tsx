@@ -54,7 +54,15 @@ export default function Register({ onRegister, onShowLogin }: RegisterProps) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ username, password }), // TODO: backend განახლების შემდეგ დაამატე სხვა ველებიც
+        body: JSON.stringify({
+          username,
+          password,
+          firstName,
+          lastName,
+          email,
+          phone,
+          birthDate,
+        }), // TODO: backend განახლების შემდეგ დაამატე სხვა ველებიც
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Registration failed");
